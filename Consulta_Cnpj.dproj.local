@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/08/01 09:58:15.000.470,=C:\Users\danillo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/01 13:01:40.000.831,=C:\Users\danillo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/08/20 10:47:20.000.772,=\\srv-dc01\Usuarios\danillo\My Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/09/02 10:55:45.000.953,=\\srv-dc01\Usuarios\danillo\My Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/10/03 09:01:01.000.435,=\\srv-dc01\Usuarios\danillo\My Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/11/09 08:55:24.000.954,=\\srv-dc01\Usuarios\Danillo\My Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/12/18 12:42:55.000.670,=\\srv-dc01\Usuarios\Danillo\My Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/12/18 12:43:06.000.983,=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\UClassEmpresa.pas</Transaction>
+    <Transaction>2019/12/18 12:43:06.000.829,=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\UClassAtividadeEmpresa.pas</Transaction>
+    <Transaction>2019/12/18 12:43:07.000.014,=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\UClassSocioEmpresa.pas</Transaction>
+    <Transaction>2019/12/18 12:43:07.000.156,=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\UConsCnpj.pas</Transaction>
+    <Transaction>2019/12/18 18:01:37.000.346,\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\Consulta_Cnpj.dproj=\\srv-dc01\Usuarios\Danillo\My Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
