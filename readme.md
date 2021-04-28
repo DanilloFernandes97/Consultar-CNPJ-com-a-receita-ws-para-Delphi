@@ -6,14 +6,6 @@
   <img alt="Made by Danillo Fernandes" src="https://img.shields.io/badge/made%20by-Danillo-%20?color=#1C1C1C">
   </p> 
 
-<p align="center">
-  <a href="#rocket-built-with">Feito com</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#information_source-how-to-run">Como rodar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#page_facing_up-license">Licence</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#mailbox_with_mail-get-in-touch">Get in touch</a>
-</p>
-<br><br>
-
 ## :rocket: Feito com
 
 Este projeto foi feito com as seguintes tecnologias:
