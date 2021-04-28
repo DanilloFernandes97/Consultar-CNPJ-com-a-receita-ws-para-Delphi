@@ -2,8 +2,8 @@ object FrmPrincipal: TFrmPrincipal
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
-  Caption = 'Consulta CNPJ'
-  ClientHeight = 447
+  Caption = 'Consulta CNPJ no ReceitaWS por Danillo Fernandes'
+  ClientHeight = 459
   ClientWidth = 810
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,6 +14,8 @@ object FrmPrincipal: TFrmPrincipal
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
@@ -24,7 +26,6 @@ object FrmPrincipal: TFrmPrincipal
     Height = 57
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 447
     object LabelCnpj: TLabel
       Left = 12
       Top = 5
@@ -38,7 +39,7 @@ object FrmPrincipal: TFrmPrincipal
       Width = 75
       Height = 25
       Caption = 'Consultar'
-      TabOrder = 0
+      TabOrder = 1
       OnClick = BtnConsultaClick
     end
     object EdtCnpj: TEdit
@@ -47,30 +48,36 @@ object FrmPrincipal: TFrmPrincipal
       Width = 121
       Height = 21
       NumbersOnly = True
-      TabOrder = 1
-      Text = '12924111000173'
+      TabOrder = 0
+      Text = '62934252000145'
     end
-    object BtnConsTeste: TBitBtn
-      Left = 272
+    object BtnConsNomeEmp: TBitBtn
+      Left = 235
       Top = 17
-      Width = 75
+      Width = 162
       Height = 25
-      Caption = 'BtnConsTeste'
+      Caption = 'Pesquisa o nome da empresa'
       TabOrder = 2
-      OnClick = BtnConsTesteClick
+      OnClick = BtnConsNomeEmpClick
+    end
+    object BtnLimparCampos: TButton
+      Left = 419
+      Top = 17
+      Width = 102
+      Height = 25
+      Caption = 'Limpar campos'
+      TabOrder = 3
+      OnClick = BtnLimparCamposClick
     end
   end
   object PanelClient: TPanel
     Left = 0
     Top = 57
     Width = 810
-    Height = 390
+    Height = 402
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = -8
-    ExplicitTop = 63
-    ExplicitWidth = 674
-    ExplicitHeight = 278
+    ExplicitHeight = 390
     object LabelAtividadePrincipal: TLabel
       Left = 12
       Top = 185
@@ -151,7 +158,7 @@ object FrmPrincipal: TFrmPrincipal
     object Label7: TLabel
       Left = 680
       Top = 9
-      Width = 66
+      Width = 63
       Height = 13
       Caption = 'Capital Social'
     end
@@ -182,6 +189,13 @@ object FrmPrincipal: TFrmPrincipal
       Width = 83
       Height = 13
       Caption = 'Natureza Jur'#237'dica'
+    end
+    object Label12: TLabel
+      Left = 500
+      Top = 385
+      Width = 307
+      Height = 13
+      Caption = 'Exemplo do uso https://receitaws.com.br/ por Danllo Fernandes'
     end
     object EdtNomeEmpresa: TEdit
       Left = 12
@@ -298,28 +312,5 @@ object FrmPrincipal: TFrmPrincipal
       Height = 21
       TabOrder = 15
     end
-  end
-  object RESTClient: TRESTClient
-    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
-    AcceptCharset = 'UTF-8, *;q=0.8'
-    BaseURL = 'https://www.receitaws.com.br/v1/cnpj'
-    Params = <>
-    HandleRedirects = True
-    RaiseExceptionOn500 = False
-    Left = 539
-    Top = 11
-  end
-  object RESTRequest: TRESTRequest
-    Client = RESTClient
-    Params = <>
-    Response = RESTResponse
-    SynchronizedEvents = False
-    Left = 387
-    Top = 11
-  end
-  object RESTResponse: TRESTResponse
-    ContentType = 'application/json'
-    Left = 467
-    Top = 11
   end
 end

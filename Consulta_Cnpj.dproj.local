@@ -12,6 +12,8 @@
     <Transaction>2019/12/18 12:43:06.000.829,=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\UClassAtividadeEmpresa.pas</Transaction>
     <Transaction>2019/12/18 12:43:07.000.014,=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\UClassSocioEmpresa.pas</Transaction>
     <Transaction>2019/12/18 12:43:07.000.156,=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\UConsCnpj.pas</Transaction>
-    <Transaction>2019/12/18 18:01:37.000.346,\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\Consulta_Cnpj.dproj=\\srv-dc01\Usuarios\Danillo\My Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2019/12/18 18:01:37.000.346,\\srv-dc01\Usuarios\Danillo\My Documents\Embarcadero\Studio\Projects\Project1.dproj=\\srv-dc01\Usuarios\Danillo\Desktop\Consulta CNPJ Receita WS\consulta_cnpj\Consulta_Cnpj.dproj</Transaction>
+    <Transaction>2021/04/27 23:03:46.134,=C:\Users\maria\Desktop\Danillo\Consulta_Cnpj\Consultar-CNPJ-com-a-receita-ws-para-Delphi\Unit1.pas</Transaction>
+    <Transaction>2021/04/28 00:31:55.848,C:\Users\maria\Desktop\Danillo\Consulta_Cnpj\Consultar-CNPJ-com-a-receita-ws-para-Delphi\UClassRestConsumer.pas=C:\Users\maria\Desktop\Danillo\Consulta_Cnpj\Consultar-CNPJ-com-a-receita-ws-para-Delphi\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

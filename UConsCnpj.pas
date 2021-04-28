@@ -3,15 +3,15 @@ unit UConsCnpj;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls,
-  Vcl.Forms, Vcl.Dialogs, IPPeerClient, System.Json, REST.Client, Data.Bind.Components, Data.Bind.ObjectScope,
-  Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls,
+  Vcl.Forms, Vcl.Dialogs, IPPeerClient, System.Json,
+  Data.Bind.Components, Data.Bind.ObjectScope,
+  Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit,
+  UClassRestConsumer;
 
 type
   TFrmPrincipal = class(TForm)
-    RESTClient: TRESTClient;
-    RESTRequest: TRESTRequest;
-    RESTResponse: TRESTResponse;
     LabelNomeEmpresa: TLabel;
     EdtNomeEmpresa: TEdit;
     PanelTop: TPanel;
@@ -23,7 +23,7 @@ type
     PanelClient: TPanel;
     LabelDataSituacao: TLabel;
     EdtDataSituacao: TMaskEdit;
-    BtnConsTeste: TBitBtn;
+    BtnConsNomeEmp: TBitBtn;
     EdtTelefone: TEdit;
     Label1: TLabel;
     EdtEmail: TEdit;
@@ -50,11 +50,19 @@ type
     MemoQuadroSocios: TMemo;
     EdtNaturezaJuridica: TEdit;
     Label11: TLabel;
+    BtnLimparCampos: TButton;
+    Label12: TLabel;
     procedure BtnConsultaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure BtnConsTesteClick(Sender: TObject);
+    procedure BtnConsNomeEmpClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure BtnLimparCamposClick(Sender: TObject);
   private
-    procedure ConsultaCnpj;
+
+    FRestConsumer: TRestConsumer;
+
+    procedure consultaCnpj;
   public
     { Public declarations }
   end;
@@ -68,7 +76,7 @@ uses Data.DBXJSONReflect, UClassEmpresa;
 
 {$R *.dfm}
 
-procedure TFrmPrincipal.BtnConsTesteClick(Sender: TObject);
+procedure TFrmPrincipal.BtnConsNomeEmpClick(Sender: TObject);
 var
   lEmpresa: TEmpresa;
   lJsonObject: TJSONObject;
@@ -76,15 +84,17 @@ begin
 
   try
 
-    RESTRequest.Resource := '/{cnpj}';
+    Self.FRestConsumer.RESTClient.Accept := '';
 
-    RESTRequest.Params.AddUrlSegment('cnpj', EdtCnpj.Text);
+    Self.FRestConsumer.RestRequest.Resource := '/{cnpj}';
 
-    RESTRequest.Execute;
+    Self.FRestConsumer.RestRequest.Params.AddUrlSegment('cnpj', EdtCnpj.Text);
 
-    lJsonObject := RESTResponse.JSONValue as TJSONObject;
+    Self.FRestConsumer.RestRequest.Execute;
 
-    if (RESTResponse.StatusCode = 200) then
+    lJsonObject := Self.FRestConsumer.RESTResponse.JSONValue as TJSONObject;
+
+    if (Self.FRestConsumer.RESTResponse.StatusCode = 200) then
     begin
 
       lEmpresa := TEmpresa.Create;
@@ -109,7 +119,8 @@ begin
   except
     on E: Exception do
     begin
-      raise Exception.Create('Erro ao realizar consulta do cnpj, motivo ' + E.Message);
+      raise Exception.Create('Erro ao realizar consulta do cnpj, motivo ' +
+        E.Message);
     end;
   end;
 
@@ -136,11 +147,33 @@ begin
 
   end;
 
-  Self.ConsultaCnpj;
+  Self.consultaCnpj;
 
 end;
 
-procedure TFrmPrincipal.ConsultaCnpj;
+procedure TFrmPrincipal.BtnLimparCamposClick(Sender: TObject);
+begin
+
+  EdtNomeEmpresa.Clear;
+  EdtDataSituacao.Clear;
+  EdtPorte.Clear;
+  EdtTipo.Clear;
+  EdtCapitalSocial.Value := 0;
+  EdtNaturezaJuridica.Clear;
+  EdtTelefone.Clear;
+  EdtEmail.Clear;
+  EdtMunicipio.Clear;
+  EdtBairro.Clear;
+  EdtNumero.Clear;
+  EdtUf.Clear;
+  EdtCep.Clear;
+  MemoAtividadePrincipal.Lines.Clear;
+  MemoAtividadesSecundarias.Lines.Clear;
+  MemoQuadroSocios.Lines.Clear;
+
+end;
+
+procedure TFrmPrincipal.consultaCnpj;
 var
 
   lJsonObject: TJSONObject;
@@ -154,20 +187,18 @@ begin
 
   try
 
-    RESTRequest.Resource := '/{cnpj}';
+    Self.FRestConsumer.RestRequest.Resource := '/{cnpj}';
 
-    RESTRequest.Params.AddUrlSegment('cnpj', EdtCnpj.Text);
+    Self.FRestConsumer.RestRequest.Params.AddUrlSegment('cnpj', EdtCnpj.Text);
 
-    RESTRequest.Execute;
+    Self.FRestConsumer.RestRequest.Execute;
 
-     lJsonObject := RESTResponse.JSONValue as TJSONObject;
+    lJsonObject := Self.FRestConsumer.RESTResponse.JSONValue as TJSONObject;
 
-    if (RESTResponse.StatusCode = 200) then
+    if (Self.FRestConsumer.RESTResponse.StatusCode = 200) then
     begin
 
-      // Nome da empresa.
       EdtNomeEmpresa.Text := lJsonObject.Values['nome'].Value;
-      //
 
       EdtDataSituacao.Text := lJsonObject.Values['data_situacao'].Value;
 
@@ -175,7 +206,9 @@ begin
 
       EdtTipo.Text := lJsonObject.Values['tipo'].Value;
 
-      EdtCapitalSocial.Value := StrToCurr( StringReplace(lJsonObject.Values['capital_social'].Value, '.', ',', [rfReplaceAll]));
+      EdtCapitalSocial.Value :=
+        StrToCurr(StringReplace(lJsonObject.Values['capital_social'].Value, '.',
+        ',', [rfReplaceAll]));
 
       EdtNaturezaJuridica.Text := lJsonObject.Values['natureza_juridica'].Value;
 
@@ -193,16 +226,17 @@ begin
 
       EdtEmail.Text := lJsonObject.Values['email'].Value;
 
-      // Atividade principal.
-      lJsonArray := lJsonObject.Get('atividade_principal').JSONValue as TJSONArray;
+      lJsonArray := lJsonObject.Get('atividade_principal')
+        .JSONValue as TJSONArray;
 
-      for lCount := 0 to lJsonArray.Count - 1 do // Qualquer coisa tenta com o size.
+      // Se o count não de certo, tente com o size.
+      for lCount := 0 to lJsonArray.Count - 1 do
       begin
 
         lJsonSubObject := lJsonArray.Items[lCount] as TJSONObject;
 
-        MemoAtividadePrincipal.Lines.Add(lJsonSubObject.Values['code'].Value + ' - ' + lJsonSubObject.Values
-          ['text'].Value);
+        MemoAtividadePrincipal.Lines.Add(lJsonSubObject.Values['code'].Value +
+          ' - ' + lJsonSubObject.Values['text'].Value);
 
         MemoAtividadePrincipal.Lines.Add('');
 
@@ -211,13 +245,14 @@ begin
       //
 
       // Atividades secundárias.
-      for lCount := 0 to lJsonArray.Count - 1 do // Qualquer coisa tenta com o size.
+      // Se o count não de certo, tente com o size.
+      for lCount := 0 to lJsonArray.Count - 1 do
       begin
 
         lJsonSubObject := lJsonArray.Items[lCount] as TJSONObject;
 
-        MemoAtividadesSecundarias.Lines.Add(lJsonSubObject.Values['code'].Value + ' - ' + lJsonSubObject.Values
-          ['text'].Value);
+        MemoAtividadesSecundarias.Lines.Add(lJsonSubObject.Values['code'].Value
+          + ' - ' + lJsonSubObject.Values['text'].Value);
 
         MemoAtividadesSecundarias.Lines.Add('');
 
@@ -226,15 +261,15 @@ begin
       //
 
       // Quadro de Sócios
-      lJsonArray := lJsonObject.Get('qsa').JsonValue as TJSONArray;
+      lJsonArray := lJsonObject.Get('qsa').JSONValue as TJSONArray;
 
       for lCount := 0 to lJsonArray.Count - 1 do
       begin
 
         lJsonSubObject := lJsonArray.Items[lCount] as TJSONObject;
 
-        MemoQuadroSocios.Lines.Add(lJsonSubObject.Values['qual'].Value + ' - ' + lJsonSubObject.Values
-          ['nome'].Value);
+        MemoQuadroSocios.Lines.Add(lJsonSubObject.Values['qual'].Value + ' - ' +
+          lJsonSubObject.Values['nome'].Value);
 
         MemoQuadroSocios.Lines.Add('');
 
@@ -251,13 +286,25 @@ begin
   except
     on E: Exception do
     begin
-      raise Exception.Create('Erro ao realizar consulta do cnpj, motivo ' + E.Message);
+      raise Exception.Create('Erro ao realizar consulta do cnpj, motivo ' +
+        E.Message);
     end;
   end;
 
 end;
 
-procedure TFrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TFrmPrincipal.FormCreate(Sender: TObject);
+begin
+  Self.FRestConsumer := TRestConsumer.Create;
+end;
+
+procedure TFrmPrincipal.FormDestroy(Sender: TObject);
+begin
+  Self.FRestConsumer.Destroy;
+end;
+
+procedure TFrmPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
 
   if (Key = VK_ESCAPE) then

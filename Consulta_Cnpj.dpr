@@ -5,7 +5,8 @@ uses
   UClassAtividadeEmpresa in 'UClassAtividadeEmpresa.pas',
   UClassEmpresa in 'UClassEmpresa.pas',
   UClassSocioEmpresa in 'UClassSocioEmpresa.pas',
-  UConsCnpj in 'UConsCnpj.pas' {FrmPrincipal};
+  UConsCnpj in 'UConsCnpj.pas' {FrmPrincipal},
+  UClassRestConsumer in 'UClassRestConsumer.pas';
 
 {$R *.res}
 
