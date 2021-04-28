@@ -41,7 +41,6 @@ type
     EdtPorte: TEdit;
     LabelPorte: TLabel;
     Label7: TLabel;
-    EdtCapitalSocial: TCurrencyEdit;
     Label8: TLabel;
     MemoAtividadesSecundarias: TMemo;
     Label9: TLabel;
@@ -52,6 +51,7 @@ type
     Label11: TLabel;
     BtnLimparCampos: TButton;
     Label12: TLabel;
+    EdtCapitalSocial: TEdit;
     procedure BtnConsultaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure BtnConsNomeEmpClick(Sender: TObject);
@@ -158,7 +158,7 @@ begin
   EdtDataSituacao.Clear;
   EdtPorte.Clear;
   EdtTipo.Clear;
-  EdtCapitalSocial.Value := 0;
+  EdtCapitalSocial.Clear;
   EdtNaturezaJuridica.Clear;
   EdtTelefone.Clear;
   EdtEmail.Clear;
@@ -183,6 +183,8 @@ var
 
   lCount: SmallInt;
 
+  lAuxValorCapitalSocial: Double;
+
 begin
 
   try
@@ -206,9 +208,11 @@ begin
 
       EdtTipo.Text := lJsonObject.Values['tipo'].Value;
 
-      EdtCapitalSocial.Value :=
+      lAuxValorCapitalSocial :=
         StrToCurr(StringReplace(lJsonObject.Values['capital_social'].Value, '.',
         ',', [rfReplaceAll]));
+
+      EdtCapitalSocial.Text := FormatFloat(',0.00', lAuxValorCapitalSocial);
 
       EdtNaturezaJuridica.Text := lJsonObject.Values['natureza_juridica'].Value;
 

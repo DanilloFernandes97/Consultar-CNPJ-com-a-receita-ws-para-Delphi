@@ -77,7 +77,7 @@ object FrmPrincipal: TFrmPrincipal
     Height = 402
     Align = alClient
     TabOrder = 1
-    ExplicitHeight = 390
+    ExplicitTop = 49
     object LabelAtividadePrincipal: TLabel
       Left = 12
       Top = 185
@@ -209,7 +209,7 @@ object FrmPrincipal: TFrmPrincipal
       Top = 204
       Width = 385
       Height = 65
-      TabOrder = 12
+      TabOrder = 11
     end
     object EdtDataSituacao: TMaskEdit
       Left = 279
@@ -226,49 +226,49 @@ object FrmPrincipal: TFrmPrincipal
       Top = 82
       Width = 167
       Height = 21
-      TabOrder = 5
+      TabOrder = 4
     end
     object EdtEmail: TEdit
       Left = 464
       Top = 82
       Width = 253
       Height = 21
-      TabOrder = 6
+      TabOrder = 5
     end
     object EdtBairro: TEdit
       Left = 153
       Top = 143
       Width = 177
       Height = 21
-      TabOrder = 8
+      TabOrder = 7
     end
     object EdtUf: TEdit
       Left = 493
       Top = 143
       Width = 65
       Height = 21
-      TabOrder = 10
+      TabOrder = 9
     end
     object EdtCep: TEdit
       Left = 575
       Top = 143
       Width = 121
       Height = 21
-      TabOrder = 11
+      TabOrder = 10
     end
     object EdtNumero: TEdit
       Left = 354
       Top = 143
       Width = 121
       Height = 21
-      TabOrder = 9
+      TabOrder = 8
     end
     object EdtMunicipio: TEdit
       Left = 12
       Top = 143
       Width = 121
       Height = 21
-      TabOrder = 7
+      TabOrder = 6
     end
     object EdtPorte: TEdit
       Left = 410
@@ -277,19 +277,12 @@ object FrmPrincipal: TFrmPrincipal
       Height = 21
       TabOrder = 2
     end
-    object EdtCapitalSocial: TCurrencyEdit
-      Left = 680
-      Top = 26
-      Width = 115
-      Height = 21
-      TabOrder = 4
-    end
     object MemoAtividadesSecundarias: TMemo
       Left = 410
       Top = 204
       Width = 385
       Height = 65
-      TabOrder = 13
+      TabOrder = 12
     end
     object EdtTipo: TEdit
       Left = 544
@@ -303,12 +296,19 @@ object FrmPrincipal: TFrmPrincipal
       Top = 301
       Width = 783
       Height = 78
-      TabOrder = 14
+      TabOrder = 13
     end
     object EdtNaturezaJuridica: TEdit
       Left = 12
       Top = 82
       Width = 253
+      Height = 21
+      TabOrder = 14
+    end
+    object EdtCapitalSocial: TEdit
+      Left = 680
+      Top = 26
+      Width = 115
       Height = 21
       TabOrder = 15
     end
